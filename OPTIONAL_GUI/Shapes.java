@@ -24,7 +24,6 @@ public class Shapes  extends JPanel{
       switch(choice){
         case 1: // draw rectangles
           g.drawRect(10 + i * 10, 10 + i * 10, 50 + i * 10,50 + i * 10);
-          break;
         case 2: // draw Ovals
           g.drawOval(10 + i * 10, 10 + i * 10, 50 + i * 10,50 + i * 10);
           break;
