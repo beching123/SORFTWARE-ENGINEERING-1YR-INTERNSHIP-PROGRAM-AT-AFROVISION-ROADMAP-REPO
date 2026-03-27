@@ -6,6 +6,12 @@ public class CoinTossing {
 
   private static int face;
   private static int tail;
+  private static SecureRandom randomNumber = new SecureRandom();
+
+  private static enum COIN {
+    HEAD,
+    TALE
+  }
 
   public CoinTossing() {
 
@@ -15,23 +21,38 @@ public class CoinTossing {
   public static void main(String[] args) {
 
     Scanner input = new Scanner(System.in);
-    SecureRandom randomNumber = new SecureRandom();
+
 
     int rand;
 
-    int choice;
-    System.out.print("%nEnter 1 to toss coin%nEnter -1 to stop%n5n");
-    choice = input.nextInt();
+    int choice = 0;
 
-    switch(choice) {
-      case 1:
-        rand = TossCoin();
-        break;
-      case -1: 
-        System.out.printf("%n The number of time face appeared: %d", face);
-        System.out.printf("%nThe number of times tail appeared: %d ", tail);
+    while (choice != -1) {
+      System.out.printf("%nEnter 1 to toss coin%nEnter -1 to stop%nEnter: ");
+      choice = input.nextInt();
+
+      switch(choice) {
+        case 1:
+          COIN coin = flip();
+          System.out.printf("\n You tossed a %s", coin.toString());
+          break;
+      }
     }
+
+    System.out.println("\n ============================================");
+    System.out.printf("Head: %d times%nTail: %d times", face, tail);
+        System.out.println("\n ============================================");
   }
 
-  public static int TossCoin () {}
+  public static COIN flip () {
+
+    int coinType = randomNumber.nextInt(2);
+    
+    if (coinType == 0)
+      face ++;
+    else 
+      tail ++;
+
+    return COIN.values()[coinType];
+  }
 }
