@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Simpletron {
   
   // Instance variable used as opcode for the simpletron computer
+  private int SIZE = 1000; // size of our memory
   
   // 1. Input/output operations:  
   private final int READ = 10;    // Read a word from the keyboard into a specific location in memory
@@ -31,7 +32,7 @@ public class Simpletron {
   private final long END_OF_INPUT = -99999;
 
   // 6. Simpletron memory.
-  private final double[] MEMORY = new double[100];
+  private final double[] MEMORY = new double[SIZE];
 
   // 7. Creating an input object from class Scanner which was imported for the collection of user input
   Scanner input = new Scanner(System.in);
@@ -67,7 +68,7 @@ public class Simpletron {
     System.out.println("*** (or data word) at a time. I will display      ***");
     System.out.println("*** the location number and a question mark (?).  ***");
     System.out.println("*** You then type the word for that location.     ***");
-    System.out.println("*** Type -999999 to stop entering your program.   ***");
+    System.out.println("*** Type -99999 to stop entering your program.   ***");
     System.out.println();System.out.println();
   }
 
@@ -77,7 +78,7 @@ public class Simpletron {
     // displaying messages
     System.out.println();System.out.println();
     System.out.println("*** Program loading completed ***");
-    System.out.println(" Program execution begins ***");
+    System.out.println("*** Program execution begins ***");
 
   }
 
@@ -94,7 +95,7 @@ public class Simpletron {
       System.out.printf("  %02d ? ", i);
       MEMORY[i]  = input.nextLong();
       
-      if (MEMORY[i] == END_OF_INPUT)
+      if ((long)MEMORY[i] == END_OF_INPUT)
         break;
       i ++;
     }
@@ -106,27 +107,40 @@ public class Simpletron {
 
     // A sample dump method
     System.out.println();System.out.println();System.out.println();
-    System.out.println("  REGISTERS: ");
-    System.out.printf("  accumulator        %+04d\n", accumulator);
-    System.out.printf("  instructionCounter     %02d",instructionCounter);
-    System.out.printf("  instructionRegister  +04d", instructionRegister);
-    System.out.printf("  operationCode        %02d", operationCode);
-    System.out.printf("  operand            %02d", operand);
-    System.out.println("MEMORY: ");
+    System.out.println("  REGISTERS: ");System.out.println();
+    System.out.printf("%-25s %+05.1f%n","  accumulator ", accumulator);
+    System.out.printf("%-27s %03d\n","  instructionCounter  ",instructionCounter);
+    System.out.printf("%-25s %+05d\n", "  instructionRegister", instructionRegister);
+    System.out.printf("%-28s %02d\n","  operationCode  ", operationCode);
+    System.out.printf("%-28s %02d\n\n","  operand  ", operand);
+    System.out.println("  MEMORY: ");
+    System.out.print("\t\t");
 
     // loop to printout the memory of the simpletron
-    for (int i = 0; i < 100; i ++) {
-  
-
+    for (int i = 0; i < 10; i ++) {
+      System.out.printf("%5d\t", i);
     }
+    
+    int label = 0;
+    for (int i = 0; i < SIZE; i ++) {
 
+      if (i % 10 == 0){
+        System.out.printf("\n\t%2d\t", label);
+        label += 10;
+      }
+
+        System.out.printf("%+05d\t", (long) MEMORY[i]);
+    }
   }
 
   // This method has the logic which is used to execute the user instructions 
   public void executeInstructions() {
 
+    // variable used to control my loop
+    boolean keepRunning = true;
+
     // loop that start the execution of instruction from location 00 (instruction-execution cycle)
-    while (MEMORY[instructionCounter] != END_OF_INPUT) {
+    while (keepRunning  && instructionCounter < 100) {
 
       // fetch      
       instructionRegister = (long) MEMORY[instructionCounter];
@@ -142,56 +156,125 @@ public class Simpletron {
         case READ:
           System.out.print("Enter an integer: ");
           MEMORY[operand] = input.nextLong();
+
+          while (MEMORY[operand] < -9999 || MEMORY[operand] > 9999) {
+            System.out.print("Enter a valid  integer (-9999 to 9999): ");
+            MEMORY[operand] = input.nextLong();
+          }
+
+          instructionCounter ++;
           break;
 
         // Write to the screen
         case WRITE:
-          System.out.printf("Value: %d", MEMORY[operand]);
+          System.out.printf("\n\nResult: %.2f\n", MEMORY[operand]);
+          instructionCounter ++;
           break;
         
         // Loading into memory
         case LOAD:
           accumulator = MEMORY[operand];
+          instructionCounter ++;
           break;
         
         // Store into accumulator
         case STORE:
-          MEMORY[operand] = accumulator;
+          if ( accumulator > -9999 && accumulator < 9999) {
+            MEMORY[operand] = accumulator;
+            instructionCounter ++;
+          }
+          else {
+            System.out.println("*** Accumulator overflow ***");
+            System.out.println("***Simpletron execution abnormally terminated ***");
+            keepRunning = false;
+            
+          }
           break;
 
         // adding from a specific location to accumulator
         case ADD:
           accumulator += MEMORY[operand];
+
+          if ( accumulator <= -9999 || accumulator >= 9999) {
+            System.out.println("*** Accumulator overflow ***");
+            System.out.println("***Simpletron execution abnormally terminated ***");
+            keepRunning = false;
+          }
+          instructionCounter ++;
           break;
 
         // subtracting from a specific location to accumulator
         case SUBTRACT:
           accumulator -= MEMORY[operand];
+          
+          if ( accumulator <= -9999 || accumulator >= 9999) {
+            System.out.println("*** Accumulator overflow ***");
+            System.out.println("***Simpletron execution abnormally terminated ***");
+            keepRunning = false;
+          }
+
+          instructionCounter ++;
           break;
 
         // dividing from a specific location to accumulator
         case DIVIDE:
-          if (MEMORY[operand] == 0)
-            System.out.println("Error!. Division by 0 is not possible");
+          if (MEMORY[operand] == 0) {
+            System.out.println("*** Attempt to divide by zero ***");
+            System.out.println("***Simpletron execution abnormally terminated ***");
+            keepRunning = false;
+
+          }
           else 
             accumulator /= MEMORY[operand];
+          instructionCounter ++;
           break;
           
-          // Multiply from specific location to accumulator
+        // Multiply from specific location to accumulator
         case MULTIPLY:
-            accumulator *= MEMORY[operand];
+          accumulator *= MEMORY[operand];
+
+          if ( accumulator <= -9999 || accumulator >= 9999) {
+            System.out.println("*** Accumulator overflow ***");
+            System.out.println("***Simpletron execution abnormally terminated ***");
+            keepRunning = false;
+          }
+            instructionCounter ++;
             break;
+
+        // Unconditional branching
+        case BRANCH:
+          instructionCounter = operand;
+          break;
+
+        // Conditional branching
+        case BRANCHZERO:
+          if (accumulator == 0)
+            instructionCounter = operand;
+          break;
+
+        // conditional branching for negative numbers
+        case BRANCHNEG:
+          if (accumulator < 0) {
+            instructionCounter = operand; 
+          } else {
+            instructionCounter ++;
+          }
+          break;
 
 
         // halt
         case HALT:
           System.out.println("*** Simpletron execution terminated ***");
+          keepRunning = false;
           break;
 
+        default:
+          System.out.println("*** Invalid operation code ***");
+          System.out.println("*** Simpletron execution abnormally terminated ***");
+          keepRunning = false;
+          break;
       }
 
-      // Incrementing the instruction counter to point to the next location
-      instructionCounter ++;
     }
 
     // calling the printOut method to display the status of each register, memory and the computer as whole
@@ -211,4 +294,3 @@ public class Simpletron {
     TestOne.executeInstructions();
   }
 }
-  
