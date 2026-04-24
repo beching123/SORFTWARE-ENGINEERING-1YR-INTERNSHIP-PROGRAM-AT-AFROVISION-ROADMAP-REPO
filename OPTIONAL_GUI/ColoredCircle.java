@@ -1,3 +1,4 @@
+package OPTIONAL_GUI;
 // Fig. 6.13 A bull-eye with two alternating colors.
   
 // Drawing 12 concentric circles with varying with varying sizes
@@ -14,8 +15,8 @@ public class ColoredCircle extends JPanel {
     super.paintComponent(g);
     int a;
     int b;
-    int radius;
-    int edges;
+    //int radius;
+    //int edges;
 
     int width = getWidth();
     int height = getHeight();

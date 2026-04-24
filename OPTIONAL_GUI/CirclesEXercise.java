@@ -1,3 +1,4 @@
+package OPTIONAL_GUI;
 // Drawing 12 concentric circles with varying with varying sizes
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -10,7 +11,7 @@ public class CirclesEXercise extends JPanel {
 
     int i = 1;
     int radius;
-    int edges;
+    //int edges;
 
     int width = getWidth();
     int height = getHeight();

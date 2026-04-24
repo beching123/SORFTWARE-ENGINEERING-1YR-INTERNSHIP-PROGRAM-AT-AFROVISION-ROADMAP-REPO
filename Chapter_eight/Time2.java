@@ -179,6 +179,5 @@ public class Time2 {
     h = (h + 1) % 24; 
 
     totalNumberOfSeconds = (h * 3600) + (m * 60) + s; 
-
   }
 } // end class Time2

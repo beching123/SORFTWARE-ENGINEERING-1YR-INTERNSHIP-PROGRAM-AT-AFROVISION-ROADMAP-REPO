@@ -1,3 +1,4 @@
+package ContinuationOfChapter7;
 // Fig. 2.9: Card.java
 // Card class represents a playing card.
 

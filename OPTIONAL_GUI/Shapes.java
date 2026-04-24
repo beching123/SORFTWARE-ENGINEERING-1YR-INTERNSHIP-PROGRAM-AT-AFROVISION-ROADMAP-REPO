@@ -1,3 +1,4 @@
+package OPTIONAL_GUI;
 // Fig. 5.27: Shapes.java
 // Drawing a cascade of shapes based on the user's choice.
 import java.awt.Graphics;

@@ -1,7 +1,7 @@
 // Special exercise 7.36 machine learning programming and the implementation of the SML.
 
 // importing the Scanner class used to collect keyboard input
-import java.util.Scanner; 
+import java.util.Scanner;
 
 public class Simpletron {
   
@@ -21,12 +21,20 @@ public class Simpletron {
   private final int SUBTRACT = 31;    // Subtract a word from a specific location in memory into the word in the accumulator (leave the result in the accumulator).
   private final int DIVIDE = 32;    // Divide a word from a specific location in memory into the word in the accumulator (leave the result in the accumulator).
   private final int MULTIPLY = 33;    // Multiply a word from a specific location in memory by the word in the accumulator ( leave the result in the accumulator).
+  private final int REMAINDER = 34;  // Remainder will be used to perform remainder calculations.
+  private final int EXPONENTIAL = 35; // exponential will be used to calculate powers.
+  
 
   // 4. Transfer-of-control operations: 
   private final int BRANCH = 40;    // Branch to a specific location in memory.
   private final int BRANCHNEG = 41;   // Branch to a specific location in memory if the accumulator is negative.
   private final int BRANCHZERO = 42;    // Branch to a specific location in memory if the accumulator is zero.
-  private final int HALT = 43;    // Halt, The program has completed its task.
+  private final int HALT = 43;    // Halt, The program has completed its task. 
+  private final int NEWLINE = 44;  // following the standard of sml the should be a new line from the opcode not manually. so this variable is an opcode that will be called when we need new line.
+
+  private final int READ_STRING = 50;   // this opcode is used to enable the user to read a input a string
+  private final int WRITE_STRING = 51;  // this opcode is used to enable the user to write or output string or display a string from the memory 
+
 
   // 5. Sentinel variable used for the terminating of input from the user
   private final long END_OF_INPUT = -99999;
@@ -45,7 +53,7 @@ public class Simpletron {
   private long instructionRegister;   // used to hold the next instruction to be performed
 
   // 9. Constant denominator variable which will be used when dividing our instructions to get operand and operation code
-  private int DENOMINATOR = 100;
+  private int DENOMINATOR = 1000;
 
 
   // Constructor which is called to initialize all the special registers to zero
@@ -90,16 +98,35 @@ public class Simpletron {
     i = 0;
 
     // Sentinel controlled while loop used to collect user input
-    while (true) {
+    while (i < MEMORY.length) {
 
-      System.out.printf("  %02d ? ", i);
-      MEMORY[i]  = input.nextLong();
+      System.out.printf("  %03d ? ", i);
+      String hexInput = input.next(); // read input as a string
+
+      //MEMORY[i]  = input.nextLong();
       
-      if ((long)MEMORY[i] == END_OF_INPUT)
-        break;
+      //if ((long)MEMORY[i] == END_OF_INPUT)
+     // if (hexInput.equals("-99999"))
+       // break;
+      // converting our hex string input to a double so our memory can store it
+      //MEMORY[i] = Integer.parseInt(hexInput, 16);
+      
+
+      try {
+      
+        double value = (double) Integer.parseInt(hexInput, 16);
+
+        if (value == END_OF_INPUT) {
+          break;
+        }
+
+        MEMORY[i] = value;
+        i ++;
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid input, please enter a hex value or -99999 to stop.");
+      }
       i ++;
     }
-
   }
 
   // This method is to print the computer dump after the program has been completely executed
@@ -107,12 +134,12 @@ public class Simpletron {
 
     // A sample dump method
     System.out.println();System.out.println();System.out.println();
-    System.out.println("  REGISTERS: ");System.out.println();
-    System.out.printf("%-25s %+05.1f%n","  accumulator ", accumulator);
+    System.out.println("\n  REGISTERS: ");System.out.println();
+    System.out.printf("%-25s %+05.2f%n","  accumulator ", accumulator);
     System.out.printf("%-27s %03d\n","  instructionCounter  ",instructionCounter);
     System.out.printf("%-25s %+05d\n", "  instructionRegister", instructionRegister);
     System.out.printf("%-28s %02d\n","  operationCode  ", operationCode);
-    System.out.printf("%-28s %02d\n\n","  operand  ", operand);
+    System.out.printf("%-28s %03d\n\n","  operand  ", operand);
     System.out.println("  MEMORY: ");
     System.out.print("\t\t");
 
@@ -125,12 +152,18 @@ public class Simpletron {
     for (int i = 0; i < SIZE; i ++) {
 
       if (i % 10 == 0){
-        System.out.printf("\n\t%2d\t", label);
+        System.out.printf("\n\t%3d\t", label);
         label += 10;
       }
+        double val = MEMORY[i];
 
-        System.out.printf("%+05d\t", (long) MEMORY[i]);
+        if (val == (long) val) {
+          System.out.printf("+07d\t", (long) val);
+        } else {
+        System.out.printf("%+05.2f\t", val);
+        }
     }
+    System.out.println();
   }
 
   // This method has the logic which is used to execute the user instructions 
@@ -140,7 +173,7 @@ public class Simpletron {
     boolean keepRunning = true;
 
     // loop that start the execution of instruction from location 00 (instruction-execution cycle)
-    while (keepRunning  && instructionCounter < 100) {
+    while (keepRunning  && instructionCounter < SIZE) {
 
       // fetch      
       instructionRegister = (long) MEMORY[instructionCounter];
@@ -152,14 +185,26 @@ public class Simpletron {
       // The switch statement which is used to determine the nature of the operation code
       switch (operationCode) {
 
-        // First 
+        // First executable instruction used to read user input
         case READ:
-          System.out.print("Enter an integer: ");
-          MEMORY[operand] = input.nextLong();
+          boolean validInput = false;
 
-          while (MEMORY[operand] < -9999 || MEMORY[operand] > 9999) {
-            System.out.print("Enter a valid  integer (-9999 to 9999): ");
-            MEMORY[operand] = input.nextLong();
+          while (!validInput) {
+
+            System.out.print("Enter hexadecimal value: ");
+            String value = input.next();
+            try {
+              double tempValue = (double) Integer.parseInt(value, 16);
+
+              if (tempValue < -9999 || tempValue > 9999) {
+                System.out.print("Error: Value out of range (-9999 to 9999): ");
+              } else {
+                  MEMORY[operand] = tempValue;
+                  validInput = true;
+              }
+            } catch (NumberFormatException e) {
+              System.out.println("Invalid Hexadecimal format.");
+            }
           }
 
           instructionCounter ++;
@@ -167,7 +212,13 @@ public class Simpletron {
 
         // Write to the screen
         case WRITE:
-          System.out.printf("\n\nResult: %.2f\n", MEMORY[operand]);
+         double outputValue = MEMORY[operand];
+         if (outputValue == (long) outputValue) {
+          System.out.printf("Value: %d", (long) outputValue);
+         } else {
+          System.out.printf("Value: %.2f", (long) outputValue);
+         }
+
           instructionCounter ++;
           break;
         
@@ -195,7 +246,7 @@ public class Simpletron {
         case ADD:
           accumulator += MEMORY[operand];
 
-          if ( accumulator <= -9999 || accumulator >= 9999) {
+          if ( accumulator <= -9999.99 || accumulator >= 9999.99) {
             System.out.println("*** Accumulator overflow ***");
             System.out.println("***Simpletron execution abnormally terminated ***");
             keepRunning = false;
@@ -207,7 +258,7 @@ public class Simpletron {
         case SUBTRACT:
           accumulator -= MEMORY[operand];
           
-          if ( accumulator <= -9999 || accumulator >= 9999) {
+          if ( accumulator <= -9999.99 || accumulator >= 9999.99) {
             System.out.println("*** Accumulator overflow ***");
             System.out.println("***Simpletron execution abnormally terminated ***");
             keepRunning = false;
@@ -223,23 +274,44 @@ public class Simpletron {
             System.out.println("***Simpletron execution abnormally terminated ***");
             keepRunning = false;
 
-          }
-          else 
+          } else {
             accumulator /= MEMORY[operand];
-          instructionCounter ++;
+            instructionCounter ++;
+          }
           break;
           
         // Multiply from specific location to accumulator
         case MULTIPLY:
           accumulator *= MEMORY[operand];
 
-          if ( accumulator <= -9999 || accumulator >= 9999) {
+          if ( accumulator <= -9999.99 || accumulator >= 9999.99) {
             System.out.println("*** Accumulator overflow ***");
             System.out.println("***Simpletron execution abnormally terminated ***");
             keepRunning = false;
           }
             instructionCounter ++;
             break;
+
+        // remainder calculation
+        case REMAINDER:
+          if (MEMORY[operand] == 0) {
+            System.out.println("*** Attempt to divide by zero ***");
+            System.out.println("***Simpletron execution abnormally terminated ***");
+            keepRunning = false;
+
+          } else {
+            accumulator %= MEMORY[operand];
+            instructionCounter ++;
+          }
+          break;
+
+        // exponential which will be used to calculate exponent
+        case EXPONENTIAL:
+          accumulator = Math.pow(accumulator, MEMORY[operand]); 
+          instructionCounter ++;
+          break;        
+
+          
 
         // Unconditional branching
         case BRANCH:
@@ -261,6 +333,11 @@ public class Simpletron {
           }
           break;
 
+        // opcode for new line
+        case NEWLINE:
+          System.out.println();
+          instructionCounter ++;
+          break;
 
         // halt
         case HALT:
@@ -268,20 +345,52 @@ public class Simpletron {
           keepRunning = false;
           break;
 
+        // read string from the user
+        case READ_STRING:
+          System.out.print("Enter string: ");
+          input.nextLine(); // clear the buffer
+          String stringInput = input.nextLine();
+          
+          MEMORY[operand] = stringInput.length();
+
+          for (int j = 0; j < stringInput.length(); j += 2) {
+            int char1 = (int) stringInput.charAt(j);
+            int char2 =(j + 1 < stringInput.length()) ? (int) stringInput.charAt(j + 1): 0;
+
+            MEMORY[operand + 1 + (j / 2)] = (char1 * 100) + char2;
+          }
+          instructionCounter ++;
+          break;
+
+        // display or write string to the screen or cmd
+        case WRITE_STRING:
+          int length = (int) MEMORY[operand];
+
+          for (int k = 0; k < length; k +=2 ) {
+
+            int packedWord = (int) MEMORY[operand + 1 + (k / 2)];
+
+            char char1 = (char) (packedWord / 100);
+            System.out.print(char1);
+
+            if (k + 1 < length) {
+              char char2 = (char) (packedWord % 100);
+
+              System.out.print(char2);
+            }
+          }
+          instructionCounter ++;
+          break;
+
+
         default:
           System.out.println("*** Invalid operation code ***");
           System.out.println("*** Simpletron execution abnormally terminated ***");
           keepRunning = false;
           break;
       }
-
     }
-
-    // calling the printOut method to display the status of each register, memory and the computer as whole
-    printOut();
-
   }
-
   public static void main(String[] args) {
 
      Simpletron TestOne = new Simpletron();
@@ -292,5 +401,8 @@ public class Simpletron {
     // Display confirmation messages to the user to assure them that their program was taken and recorded successfully
     TestOne.displayConfirmationMessage();
     TestOne.executeInstructions();
+
+    // calling the printOut method to display the status of each register, memory and the computer as whole
+    TestOne.printOut();
   }
 }

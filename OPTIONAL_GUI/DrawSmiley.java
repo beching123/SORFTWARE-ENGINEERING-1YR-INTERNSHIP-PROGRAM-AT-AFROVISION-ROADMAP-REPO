@@ -1,3 +1,4 @@
+package OPTIONAL_GUI;
 // Fig. 6.11: DrawSmiley.java
 // Drawing a smiley face using colors and filled shapes.
 import java.awt.Color;

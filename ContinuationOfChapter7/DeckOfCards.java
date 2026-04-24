@@ -1,3 +1,4 @@
+package ContinuationOfChapter7;
 // fig. 7.10: DeckOfCards.java
 // DEckOfCards class represents a deck of playing cards
 import java.security.SecureRandom;

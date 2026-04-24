@@ -1,5 +1,7 @@
+package ContinuationOfChapter7;
 /* // fig. 7.11: DeckOfCardsTest.java
 // Card shuffling and dealing
+package ContinuationOfChapter7;
 
 public class DeckOfClassTest {
 

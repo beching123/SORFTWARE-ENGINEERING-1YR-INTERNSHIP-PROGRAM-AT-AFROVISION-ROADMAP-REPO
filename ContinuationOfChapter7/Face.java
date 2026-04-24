@@ -1,4 +1,5 @@
 // exercise 7.35 face.java
+package ContinuationOfChapter7;
 
 public enum Face {
   ACE,

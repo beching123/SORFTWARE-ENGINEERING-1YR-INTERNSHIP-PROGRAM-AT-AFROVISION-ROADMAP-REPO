@@ -1,3 +1,4 @@
+package OPTIONAL_GUI;
 // Fig. 4.19: DrawPanelTest.java
 //Creating JFrame to display DrawPanel.
 import javax.swing.JFrame;

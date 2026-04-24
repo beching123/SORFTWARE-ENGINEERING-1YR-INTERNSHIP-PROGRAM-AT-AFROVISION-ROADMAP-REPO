@@ -11,7 +11,7 @@ public class Time2Test {
     Time2 t3 = new Time2(21, 34); // 21:34:00
     Time2 t4 = new Time2(12, 25, 42); // 12:25:42
     Time2 t5 = new Time2(t4); // 12:25:42
-    Time2 t6 = new Time2(10, 50, 40);
+    Time2 t6 = new Time2(11, 59, 59);
     t6.tick();
     t6.incrementMinute();
     t6.incrementHour();

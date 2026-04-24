@@ -1,3 +1,4 @@
+package OPTIONAL_GUI;
 // Fig. 6.12: DrawSmileyTest.java
 // Test application that displays a smiley face.
 import javax.swing.JFrame;

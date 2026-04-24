@@ -1,3 +1,4 @@
+package OPTIONAL_GUI;
 // Fig. 5.28: ShapesTest.java
 // Obtaining user input and creating a JFrame to display Shapes.
 import javax.swing.JFrame; // handle the display

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>cards</title>
+</head>
+<body>
+  <h1>
+    Cart Quantity
+  </h1>
+  <button onclick = "console.log(`cart Quantity : ${cartQuantity}`)">
+    Show Quantity
+  </button>
+  <button onclick = "console.log(`cart Quantity : ${cartQuantity = 1 + cartQuantity}`)">
+    Add to cart
+  </button>
+  <button onclick = "console.log (`cart Quantity: ${cartQuantity = 2 + cartQuantity}`)">
+    +2
+  </button>
+  <button onclick = "console.log (`cart Quantity: ${cartQuantity = 3 + cartQuantity}`)">
+    +3
+  </button>
+  <button onclick = "console.log(' cart was reset');console.log(`cary Qiantity: ${cartQuantity = 0}`)">
+    Resert cart
+  </button>
+  <script>
+    let cartQuantity = 0;
+  </script>
+</body>
+</html>

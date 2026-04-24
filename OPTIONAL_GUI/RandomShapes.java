@@ -1,3 +1,5 @@
+package OPTIONAL_GUI;
+
 // exercise 6.2 Drawing random shapes
 import java.awt.Color;
 import java.awt.Graphics;
