@@ -32,7 +32,7 @@ public class TextFieldFrame extends JFrame {
     add(textField2); // add textField2 to JFrame
 
     // construct text field with default text and 21 columns
-    textField3 = new JTextField("Enter text here");
+    textField3 = new JTextField("Enter text here", 21);
     textField3.setEditable(false); // disable editing
     add(textField3); // add textField3 to JFrame
 

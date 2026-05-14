@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1778433843 source:c:\users\pc\desktop\programin resource\sorftware-engineering-1yr-internship-program-at-afrovision-roadmap-repo\c++_programs\columnar_cipher\main.cpp
+	<iostream>
+	<string>
+	<conio.h>
+	<cctype>
+
