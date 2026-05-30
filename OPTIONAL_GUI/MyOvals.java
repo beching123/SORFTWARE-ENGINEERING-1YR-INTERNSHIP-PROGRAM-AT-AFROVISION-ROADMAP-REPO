@@ -20,6 +20,7 @@ public class MyOvals extends MyShape {
 
     super(x1, y1, x2, y2, color);
     this.fillShape = fillShape;
+    System.out.printf("2");
        
   }
 
@@ -71,11 +72,11 @@ public class MyOvals extends MyShape {
 
     if (getFillShape() == true) {
 
-      g.fillRect(getUpperLeftX(), getUpperLeftY(), getWidth(), getHeight());
+      g.fillOval(getUpperLeftX(), getUpperLeftY(), getWidth(), getHeight());
 
     } else {
 
-    g.drawRect(getUpperLeftX(), getUpperLeftY(), getWidth(), getHeight());
+    g.drawOval(getUpperLeftX(), getUpperLeftY(), getWidth(), getHeight());
 
     }
   }

@@ -18,6 +18,7 @@ public class MyRectangle extends MyShape {
 
     super(x1, y1, x2, y2, color);
     this.fillShape = fillShape;
+    System.out.printf("2");
 
 
   }
