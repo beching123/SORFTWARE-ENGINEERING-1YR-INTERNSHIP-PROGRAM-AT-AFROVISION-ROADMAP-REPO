@@ -1,0 +1,16 @@
+Approach to exercises 21.8
+Reverse list and store a copy of it. 
+Create a method reverseCopy , that takes 
+a list as argument and reverses it, then 
+stores the new result in a copy
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Scattered thoughts: 
+- Working on Class SortList
+- The method is created in that class according 
+    exercise, we traverse the list from first node to the last
+    then we remove from the front of the list, and store infront or insertAtFront 
+    In the copy, each time the method is called , with each data, the pushes the 
+    node which is infront behind. and the process keeps continueing, at the end
+    the first node of our original list, will be at the end of our copy list. 

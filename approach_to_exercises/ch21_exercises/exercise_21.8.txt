@@ -1,0 +1,31 @@
+Approach to exercises 21.8
+Merge sorted lists, this exercises is to create a program that merge , a list pass as an 
+argument with the list that calls the method, its the same as the   
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Scattered thoughts:
+
+- No new code file will be created for this exercise, since i am to 
+  modify exercises 21.7 , files, SortList and SortListTest. 
+- Since we are merging a sorted list, we will use already existing method, insertInOrder
+- we will loop through the list passed as an argument till we reach the last node,
+- each time we travers the list, we call the insertInOrder method, 
+- but the method might likely through an empty list exception so that will need some action
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Approach: 
+
+- Create a method called merge
+- The method throws an EmptyListException
+- Check if the list passed in as a parameter is empty
+- If empty, return the list, that called the method as the out, then terminate the 
+  method by throwing and EmptyListException.
+- other wise, start traversing from node 1.
+    - call insertInOrder method for each node data
+    - keep doing that till we reach the lastNode or null
+    - end travers
+- end if.
+
+ Coding time 😭🥲🫡, visit the file
+    - SortList and SortListTest, in ch21
+ to check it out, like we discuss. 

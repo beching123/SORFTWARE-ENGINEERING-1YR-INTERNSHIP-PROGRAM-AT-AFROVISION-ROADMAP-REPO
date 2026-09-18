@@ -1,0 +1,16 @@
+h1 {
+  color: red;
+}
+
+a:link {
+  color: magenta;
+}
+
+a:visited {
+  color: green;
+}
+
+a:hover {
+
+    text-decoration: none;
+}

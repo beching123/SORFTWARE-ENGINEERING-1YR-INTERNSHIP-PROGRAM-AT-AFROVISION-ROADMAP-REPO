@@ -1,0 +1,36 @@
+Approach to exercises 21.10
+Checking wheather a string is pallindrom or not. 
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Scattered thoughts:
+
+- First i'll ask the use to enter the line of text
+- then ill split the text at every space, for now 
+    ill not input any special character since i don't 
+    know how to come with a regular expression for 
+    space characters and special once. 
+- ill store the words in a temporal array,
+- Ill create two stack of characters
+- Stack1: 
+    - Used to store the characters in the right order
+    - Start from the end of the word array
+    - just take each words from the array , split into 
+        characters and store in the stack.
+- Stack2: 
+    - Used to store the reverse order of words
+    - just take each words in the array, start from
+        the end of the words, copy each character and 
+        paste into the stack
+    - At this point both stack are opposite to each other, 
+- now compare each node of the stack to the other, 
+- now imidiately a node is reached where the data are not same 
+- quite and print , not a pallindrome,
+
+
+* - some modifications were done during the implementation 
+
+
+ Coding time 😭🥲🫡, visit the file
+- Palindrome in ch21
+
+

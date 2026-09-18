@@ -1,0 +1,60 @@
+Approach to exercises 21.7 
+Sorted List, inserting values in a list in sorted order. 
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Scattered thoughts: 
+- Since I was asked to modified the original List code from Fig. 21.3, I'll copy that code and put to a new class file
+- Then I create a method named insertInOrder that will do the sorting before insertion . 
+- The approach to the sorting is fairly easy in ascending order. 
+- I'll first, insert the first elements, if the list is empty the keep comparing next element with the current once in the list.
+- When a good position is found, then insert it there. 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Approach: 
+ - I'll create a class called sortedList.
+ - Copy the list code from Fig. 21.3 and paste there.
+ - modify the available insertion method to take particular node and the value to be inserted as parameters.
+    - The methods takes a node, and data to be inserted.
+    - Then old links will be brokens and new once created, so we concerntrate on a single nodes not the 
+        entire list like the old version. 
+ - Create a method insertInOrder.
+ - Method insertInOrder: 
+    - Will take a generic object as input of type T.
+    - checks the current list status, 
+        - if its empty then just create a node , and assign first and lastnode to
+            reference that node, then assign the object to be the data of the 
+            first node. 
+        - end if.
+        - if its not empty, we compare the data of the first node  with the data to be inserted
+            - if it is greater than the data to be inserted
+                - then we start traversing the list using a while loop that start from the second node, till the lastNode.
+                - the while loop moves from nodes to nodes, 
+                - takes the data of each node
+                - compares with the data to be inserted,
+                - if it is less than then we insert infront of it. 
+                - if it is greater than then we continue traversing. 
+                - if we reach the lastNode, then we just insert it in the last node.
+                - then we terminate. 
+        - end if. 
+ - end the method. 
+ 
+ - A test class will be created to test the new method. 
+ - since there are cases where the element will need to inserted at the end of the begining or the end of the list.
+ - rather than modifying the old methods (insertAtFront and insertAtBack) i will create different method to inser 
+ - in front or behind node, so that the previous once remains universal to the list, while the new methods. 
+ - insertInFrontOfNode and InsertBehindOfNode are node orientated. 
+ - now the two new mthod will be condence to one, since a node has only one next Node reference
+ - this means references will be changed instead. 
+ 
+ Coding time 😭🥲🫡, visit the file
+    - SortList and SortListTest, in ch21
+ to check it out, like we discuss. 
+
+ ** - alot of adjustments were made during the writting of the code , which was not 
+        mentioned in the this file. so take your time to go through the code , as you will 
+        come to see, the comments will be of good help.
+
+ ** - When visiting the  class from this exercises , dont pay too much attention to the merge method.  
+
+
+

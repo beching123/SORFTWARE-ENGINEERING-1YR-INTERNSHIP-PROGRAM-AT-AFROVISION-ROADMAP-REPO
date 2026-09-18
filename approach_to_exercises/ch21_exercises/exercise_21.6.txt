@@ -1,0 +1,50 @@
+Approach to exercises 21.6 
+Using Linked list to concatenate two Lists of Characters into one
+
+The second list is concatenated to the first one from the last. 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Scattered thoughts: 
+
+- first tought: first my class ListConcatenation will take two parameter during the instantiation of its object
+	- List1 and List2...
+-  Using the first thought I had a road block so another approach is that in the test class, it will create and instance variable to the ListConcatenation method. 
+	then it will call the objects concatenate method that takes in two parameters which are the two list
+	- List1 and List2. 
+now it will first check if both list are empty , if the first is empty then the second will be return as the output
+other wise the first will be return as the output if the second is empty as concatenating to an empty list will give you the one that is not empty , or if both are empty the we can throw an EmptyListException , now this last check could be implemented in the previous one to, as in if any is empty then an Exception will be thrown rather than return one of them. 
+
+- If both have values, then we will get the address of the lastNode , of the first list, using the last node reference variable. 
+- now we will get the nextNode, we will remove and element from the second list from the top, then just insert to the first list, 
+this process will continue till the second list is empty as in all the elements have been remove, meaning the reference node will be pointed to null , this means we can use recursion to archive this 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Approach: 
+ - Create a class named ListConcatenation with a generic type T declared. 
+ - declare and instance variable node, it will be used as a pointer, to traverse List2.
+ - The constructor of the class will assign it to null, as initial position. 
+
+ the concatenate method: 
+ - declare a public method concatenate , that takes in 2 paramter, which are of Type List (with a generic type T). 
+ - it checks if any list is empty, then return the full one as the output.
+ - if both are empty , then an exception will be thrown
+ - if both have elements(this is the real work): 
+ 	- take node to point to List2 first node,
+ 	- a While loop which keeps iterate from node till when it becomes null or last node
+ 	- we insert the data of the node variable to List1,
+ 	- then update node to the nextNode from the reference variable it contains. 
+ - At this point the list is exhusted. 
+ - at the end of the concatenate method call List1's print method to print the new list, with the additional values. 
+ - end of code. 
+
+- Create a class named ListConcatenationTest, with Generic Type T declared. 
+- this class will have only one method. 
+
+the main method:
+ -  Declare and initialize two list object, since its a test class, we will give the lists initial elements , of course we will try other combinations
+ -  Declare and initialize a ListConcatenation object .
+ - call the contanation method of the object above and pass in the two list as parameters. 
+ - end of class. 
+
+After going through the exercises again, I discovered that, we will be using a static concatenate method, meaning there is no need to create a method of the ListConcatenation class, and the node instance variable can be a local variable inside our concatenate method. 
+
+Coding time 😭🥲🫡, visit the file to check it out, like we discuss. 
+

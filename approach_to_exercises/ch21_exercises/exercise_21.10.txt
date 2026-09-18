@@ -1,0 +1,50 @@
+Approach to exercises 21.10
+Inputing a Line of text, and using a stack
+to print it in reverse order. 
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Scattered thoughts:
+- I will create a new class that has reference to our stack class. 
+- I will prompt the user to input the line of text
+- then ill use a regular expression to seperate the 
+    line of text into words and store each word into
+    the stack, till. 
+- since a stack allow the removal of element only from one direction 
+- ill use recursion to traverse the list till the end, once are at the
+    end of the stack, before we start printing what we have poped. 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Approach: 
+
+- Create a class Called StackReverse
+- Create a method called reverseLineOfText
+- Parse the lineOfText as a parameter 
+    - create a regular expression, that recognises 
+    white characters (space, tab, special characters and others)
+    it splits the line of text at the regular expression
+    then stores the result in an List, 
+    use a loop to traverse and remove the words from the list
+    to the stack,.
+    - At this point the words are already in reverse order
+    - just pop and display to the user. 
+
+* - This conclusion indicates that, no recursion is needed for this problem
+    Though from a different Approach , it could be used, which is a good practice since i am 
+    trying to learn recursion. 
+
+
+
+ Coding time 😭🥲🫡, visit the file
+- StackReverse in ch21
+
+* - After coding the exercises, was quite simple
+        - Prompt The user to enter the line of text
+        - Store it
+        - Parse it as an argument to our reverse method
+        - Split the text at every space
+        - and store temporarily into a temporary array
+        - copy and push to our stack
+        - traverse our stack and pop and print each poped value
+        - end method. 
+
+
