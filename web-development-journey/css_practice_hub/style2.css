@@ -1,0 +1,43 @@
+article p::first-line {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+article p::selection {
+  background-color: green;
+}
+
+article p::first-letter {
+  background-color: yellow;
+  border: 1px solid black;
+  font-size: 2rem;
+}
+
+.box::before {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 100px;
+  background-color: rebeccapurple;
+  border: 1px solid black;
+}
+ul > li {
+  border-top: 5px solid red;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+h1 + p {
+  font-weight: bold;
+  background-color: #333333;
+  color: white;
+  padding: 0.5em;
+}
+h1 ~ p {
+  font-weight: bold;
+  background-color: #333333;
+  color: white;
+  padding: 0.5em;
+}

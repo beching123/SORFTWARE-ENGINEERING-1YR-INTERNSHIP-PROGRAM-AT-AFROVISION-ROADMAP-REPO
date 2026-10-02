@@ -1,10 +1,10 @@
-package Chapter_twelve;
+package java_code.ch12;
 // Exercise 12.17 Interactive Drawing Application
 
-import OPTIONAL_GUI.MyLine;
-import OPTIONAL_GUI.MyOvals;
-import OPTIONAL_GUI.MyRectangle;
-import OPTIONAL_GUI.MyShape;
+import java_code.OPTIONAL_GUI.MyLine;
+import java_code.OPTIONAL_GUI.MyOvals;
+import java_code.OPTIONAL_GUI.MyRectangle;
+import java_code.OPTIONAL_GUI.MyShape;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Graphics;
@@ -12,7 +12,7 @@ import java.awt.Point;
 import javax.swing.JPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+//import java.awt.event.MouseMotionListener;
 
 
 public class DrawPanel  extends JPanel {
@@ -115,7 +115,7 @@ public class DrawPanel  extends JPanel {
   }
 
   // private inner class to help handler mouse event
-  private  class MouseEventsForPanel extends MouseAdapter   implements MouseMotionListener {
+  private  class MouseEventsForPanel extends MouseAdapter {
 
     @Override 
     public void mousePressed(MouseEvent e) {

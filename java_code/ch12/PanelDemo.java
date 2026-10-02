@@ -1,4 +1,4 @@
-package Chapter_twelve;
+
 // Fig. 12.46: PanelDemo.java
 // Testing PanelFrame.
 import javax.swing.JFrame;

@@ -1,4 +1,4 @@
-package Chapter_twelve;
+
 // Fig. 12.35: Painter.java
 // Testing PaintPanel;
 import java.awt.BorderLayout;

@@ -338,12 +338,15 @@ public class Tree<T extends Comparable<T>> {
                 System.out.print("-");
             }
 
+            
             System.out.printf("%3s", currentNode.data); // outputing the value in the current node
 
             currentNode = currentNode.leftNode; 
             totalSpaces += 5;
 
-        }System.out.println();
+        }
+       
+        System.out.println(); System.out.print("|");System.out.println();
 
     }
 

@@ -1,13 +1,13 @@
  // JFrame subclass DrawFrame.java tha will
 //provide the GUI of our drawPanel
-package Chapter_twelve;
+package java_code.ch12;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+//import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;

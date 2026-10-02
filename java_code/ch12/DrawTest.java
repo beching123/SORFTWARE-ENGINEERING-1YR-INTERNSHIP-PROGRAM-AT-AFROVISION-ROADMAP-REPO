@@ -1,5 +1,5 @@
 // test application for automatic drawing app
-package Chapter_twelve;
+package java_code.ch12;
 
 import javax.swing.JFrame;
 
