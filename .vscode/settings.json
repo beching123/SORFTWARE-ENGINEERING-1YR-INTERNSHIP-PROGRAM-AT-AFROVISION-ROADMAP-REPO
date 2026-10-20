@@ -1,10 +1,8 @@
 {
   "java.format.settings.url": ".vscode/java-formatter.xml",
-  "java.project.sourcePaths": [
-    "."
+  "java.project.sourcePaths": ["."],
+  "java.project.referencedLibraries": [
+    "c:\\Users\\DELL\\Downloads\\postgresql-42.7.14.jar"
   ],
-  "java.project.referencedLibraries": [],
-  "cSpell.words": [
-    "Simpletron"
-  ]
+  "cSpell.words": ["Simpletron"]
 }

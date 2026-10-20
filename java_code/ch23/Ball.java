@@ -3,6 +3,7 @@ package java_code.ch23;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RadialGradientPaint;
 import java.awt.geom.Ellipse2D;
 
 import java.security.SecureRandom;
@@ -25,7 +26,7 @@ public class Ball {
         this.x = (x < 0) ? 0: x;
         this.y = (y < 0) ? 0: y;
 
-        color = new Color(generator.nextInt(256), generator.nextInt(256), generator.nextInt(256));
+      
 
     }
 

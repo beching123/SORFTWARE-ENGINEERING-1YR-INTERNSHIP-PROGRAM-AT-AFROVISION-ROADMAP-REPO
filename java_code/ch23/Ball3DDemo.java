@@ -6,34 +6,37 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
 import java.awt.RenderingHints;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.security.SecureRandom;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Ball3DDemo extends JPanel {
+public class Ball3DDemo {
 
     // Ball attributes
     private final int x;
     private final int y;
-    private final int diameter = 100;
+   
+    private final int diameter = 50;
     private final int radius = diameter / 2;
-    private final Color baseColor = new Color(220, 00, 250); // Crimson red
+    private final Color baseColor;
+    // random generator
+    SecureRandom generator = new SecureRandom();
 
     public Ball3DDemo(int x, int y) {
 
-        this.x = x;
-        this.y = y;
-        setPreferredSize(new Dimension(400, 350));
-        setBackground(new Color(240, 240, 240));
+        this.x = (x < 0) ? 0 : x;
+        this.y = (y < 0) ? 0 : y;
+
+        this.baseColor = new Color(generator.nextInt(256), generator.nextInt(256), generator.nextInt(256));
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    // draw method for the ball
+    protected void draw(Graphics g) {
+
+        // since we will be drawing 3d ball from 2d
         Graphics2D g2d = (Graphics2D) g;
 
         // 1. Enable Anti-Aliasing for smooth 3D curves
@@ -41,8 +44,8 @@ public class Ball3DDemo extends JPanel {
 
         // --- DRAW THE FLOOR SHADOW ---
         int shadowY = 250; // Floor line position
-        int shadowWidth = 110;
-        int shadowHeight = 25;
+        int shadowWidth = 40;
+        int shadowHeight = 15;
         int shadowX = x + radius - (shadowWidth / 2);
 
         // Soft, semi-transparent gradient for the shadow
@@ -77,25 +80,4 @@ public class Ball3DDemo extends JPanel {
         g2d.fillOval(x + (int) (radius * 0.4), y + (int) (radius * 0.3), (int) (radius * 0.5), (int) (radius * 0.3));
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("3D Sphere Renderer");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(1000, 1000);
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-
-            frame.addMouseListener(new MouseAdapter() {
-
-                // implementing the parent mouseClicked method
-                @Override
-                public void mouseClicked(MouseEvent e) {
-
-                    frame.add(new Ball3DDemo(e.getX(), e.getY()));
-                    frame.pack();
-                }
-            });
-
-        });
-    }
 }
